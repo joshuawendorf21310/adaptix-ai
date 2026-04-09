@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*.bak
+.next/
+node_modules/
+.venv/
+venv/
+.env
