@@ -32,7 +32,7 @@ const STATUS_TONE: Record<string, 'success' | 'warning' | 'critical' | 'neutral'
 };
 
 export default function ReviewQueuePage() {
-  const { data: log, loading, error } = useApi<PromptLogEntry[]>('/ai/prompt-log?limit=50');
+  const { data: log, loading, error } = useApi<PromptLogEntry[]>('/api/v1/ai/prompt-log?limit=50');
 
   const pendingEntries = log?.filter((e) => ['pending', 'processing'].includes(e.status ?? '')) ?? [];
   const errorEntries = log?.filter((e) => ['error', 'failed'].includes(e.status ?? '')) ?? [];

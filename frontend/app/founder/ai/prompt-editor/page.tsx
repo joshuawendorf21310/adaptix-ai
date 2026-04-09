@@ -30,8 +30,8 @@ interface AuditSummary {
 }
 
 export default function PromptEditorPage() {
-  const logState = useApi<PromptLogEntry[]>('/ai/prompt-log?limit=20');
-  const auditState = useApi<AuditSummary>('/ai/prompts/audit');
+  const logState = useApi<PromptLogEntry[]>('/api/v1/ai/prompt-log?limit=20');
+  const auditState = useApi<AuditSummary>('/api/v1/ai/prompts/audit');
 
   const loading = logState.loading || auditState.loading;
   const log = logState.data;

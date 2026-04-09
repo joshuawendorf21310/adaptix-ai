@@ -1,0 +1,26 @@
+:root {
+  --color-bg-void: #090c10;
+  --color-bg-panel: #11161d;
+  --color-text-primary: #f5f7fa;
+  --color-text-secondary: #c4ccd6;
+  --color-text-muted: #8792a2;
+  --color-border-default: rgba(255,255,255,0.14);
+  --color-brand-orange: #ff8b2b;
+  --color-status-active: #34d399;
+  --color-status-warning: #fbbf24;
+  --color-status-info: #38bdf8;
+  --color-brand-red: #ef4444;
+  --color-ai-cyan: #22d3ee;
+  --color-ai-magenta: #d946ef;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--color-bg-void); color: var(--color-text-primary); font-family: Inter, Arial, Helvetica, sans-serif; }
+a { color: inherit; text-decoration: none; }
+.platform-shell { min-height: 100vh; background: linear-gradient(180deg, #0a0f15 0%, #0d131b 100%); }
+.platform-shell__inner { max-width: 1440px; margin: 0 auto; padding: 1.5rem; }
+.platform-shell__breadcrumbs { margin-bottom: 1rem; }
+.plate-card, .command-panel { background: rgba(255,255,255,0.03); border: 1px solid var(--color-border-default); border-radius: 16px; padding: 1rem; }
+.text-text-primary { color: var(--color-text-primary); }
+.text-text-secondary { color: var(--color-text-secondary); }
+.text-text-muted { color: var(--color-text-muted); }
+.text-red-400 { color: #fca5a5; }

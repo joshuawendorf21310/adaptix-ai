@@ -27,7 +27,7 @@ interface AuditSummary {
 }
 
 export default function PoliciesPage() {
-  const { data: audit, loading, error } = useApi<AuditSummary>('/ai/prompts/audit');
+  const { data: audit, loading, error } = useApi<AuditSummary>('/api/v1/ai/prompts/audit');
 
   return (
     <div className="space-y-6 md:space-y-7">

@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PlatformShell } from '@/components/PlatformShell';
-import { AiNav } from '@/components/ai/AiNav';
 
 /**
  * AI Portal Layout Shell
@@ -19,6 +19,13 @@ import { AiNav } from '@/components/ai/AiNav';
  */
 export default function AILayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const links = [
+    { href: '/ai', label: 'Overview' },
+    { href: '/founder/ai/policies', label: 'Policies' },
+    { href: '/founder/ai/prompt-editor', label: 'Prompt Editor' },
+    { href: '/founder/ai/review-queue', label: 'Review Queue' },
+    { href: '/founder/ai/thresholds', label: 'Thresholds' },
+  ];
 
   // Extract current module from pathname for breadcrumbs
   const pathSegments = pathname.split('/').filter(Boolean);
@@ -80,7 +87,21 @@ export default function AILayout({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* AI Navigation */}
-      <AiNav />
+      <div className="flex flex-wrap items-center gap-3">
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="command-panel"
+            style={{
+              padding: '0.55rem 0.9rem',
+              textDecoration: pathname === link.href ? 'underline' : 'none',
+            }}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 
