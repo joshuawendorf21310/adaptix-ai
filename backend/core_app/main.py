@@ -11,9 +11,19 @@ from core_app.api.health_router import router as health_router
 from core_app.api.system_health_router import router as system_health_router
 from core_app.config import settings
 
-app = FastAPI(title="Adaptix AI", version="0.1.0")
-origins = [origin.strip() for origin in settings.cors_origins.split(",") if origin.strip()] or ["*"]
-app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app = FastAPI(
+    title=settings.app_name,
+    version=settings.app_version,
+    debug=settings.debug,
+)
+origins = settings.get_cors_origins_list()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(health_router)
 app.include_router(auth_router)
 app.include_router(ai_shell_router)
