@@ -84,7 +84,7 @@ class ReviewAction(Base):
 
     # Details
     comment: Mapped[str | None] = mapped_column(Text, nullable=True)
-    metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    action_metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
 
     # Timestamp
     created_at: Mapped[datetime] = mapped_column(

@@ -13,7 +13,7 @@ import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
 
-from core_app.core.config import get_settings
+from core_app.config import get_settings
 
 logger = logging.getLogger(__name__)
 
