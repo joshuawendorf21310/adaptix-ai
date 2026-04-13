@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: adaptix_ai
+      POSTGRES_USER: adaptix
+      POSTGRES_PASSWORD: adaptix_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U adaptix"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8014:8014"
+    environment:
+      ADAPTIX_AI_ENV: development
+      ADAPTIX_AI_DATABASE_URL: postgresql://adaptix:adaptix_dev_password@postgres:5432/adaptix_ai
+      ADAPTIX_AI_ALLOW_DEV_AUTH: "true"
+      ADAPTIX_AI_CORS_ORIGINS: http://localhost:3003
+      AWS_REGION: us-east-1
+      # Add your AWS credentials here or use AWS credential chain
+      # AWS_ACCESS_KEY_ID: your-key
+      # AWS_SECRET_ACCESS_KEY: your-secret
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      sh -c "
+        alembic upgrade head &&
+        uvicorn core_app.main:app --host 0.0.0.0 --port 8014 --reload
+      "
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      NEXT_PUBLIC_AI_API_BASE: http://localhost:8014
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
