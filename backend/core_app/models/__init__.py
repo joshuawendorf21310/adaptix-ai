@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from .audit import AuditEvent
+from .budget import Budget, BudgetConsumption, CostAlert
 from .execution import ExecutionRequest, ExecutionResult
 from .policy import AiPolicy, PolicyRevision
 from .prompt import PromptDefinition, PromptVersion
@@ -22,6 +23,10 @@ __all__ = [
     # Usage
     "UsageLedgerEntry",
     "UsageAggregation",
+    # Budget
+    "Budget",
+    "BudgetConsumption",
+    "CostAlert",
     # Audit
     "AuditEvent",
     # Review
